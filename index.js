@@ -17,6 +17,9 @@ bot.command('tlistid', (ctx) => {
         if (matches) {
             const listId = matches[1]
             ctx.state.listId = listId
+            if (!fs.existsSync('chatroom')) {
+                fs.mkdirSync('chatroom', { recursive: true });
+            }
             fs.writeFileSync(`chatroom/${chatId}.txt`, listId)
             return ctx.reply('Trello list id là ' + listId)
         } 
